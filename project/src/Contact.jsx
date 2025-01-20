@@ -22,7 +22,7 @@ function Contact() {
                         <textarea className="border-blue-900 border-2 rounded-md active:border-red-500 w-[35vw]"
                         name="message" required></textarea>
                     </div>
-                    <button className="text-lg items bg-orange-500 rounded-md w-[15vw] py-1"
+                    <button className="text-lg bg-orange-400 rounded-md w-[15vw] py-1"
                     type="submit">Send Message</button>
                 </form>
             </div>
