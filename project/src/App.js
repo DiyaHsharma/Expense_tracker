@@ -1,6 +1,4 @@
 import './App.css';
-import Footer from './Footer';
-import Header from './Header';
 import Home from './Home';
 import SignUp from './SignUp';
 import Login from './Login'
@@ -10,7 +8,7 @@ function App() {
   return (
     <>
       <Router>
-        <div className='flex flex-col justify-between w-[99vw] bg-gradient-to-b from-slate-500 via-slate-800 to-black text-white'>
+        <div className='flex flex-col justify-between w-[99vw] overflow-x-clip bg-gradient-to-b from-slate-500 via-slate-800 to-black text-white'>
           <Routes>
           <Route path='/' element={<Home></Home>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>

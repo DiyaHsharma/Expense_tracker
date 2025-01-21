@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import Features from "./Features";
 import About from "./About";
 import Contact from "./Contact";
 import Header from "./Header";
@@ -12,7 +12,7 @@ function Home() {
         <Header></Header>
 
             <div className="h-[86vh] flex flex-col items-center justify-center  gap-10 p-6 
-            bg-[url('https://images.unsplash.com/photo-1707157284454-553ef0a4ed0d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]
+            bg-[url('https://static.vecteezy.com/system/resources/previews/041/335/190/non_2x/financial-business-statistics-with-bar-graph-and-candlestick-chart-show-stock-market-price-on-dark-background-vector.jpg')]
             bg-cover">
 
                 <h1 className="text-4xl font-bold text-yellow-200">
@@ -22,14 +22,14 @@ function Home() {
                     Experience the power of intelligent expense tracking and budget management with ExpenseTracker.
                 </p>
                 <Link to='/signUp'><button className="text-white bg-orange-400 rounded-full px-4 py-2 
-                animate-pulse hover:bg-green-500 hover:-translate-y-1 ease-in duration-200
+                animate-[pulse_3s_ease-in_infinite] hover:bg-green-500 hover:-translate-y-1 ease-in duration-200
                 hover:animate-none">
                     Start Your Financial Journey
                 </button>
                 </Link>
 
             </div>
-            <Card></Card>
+            <Features></Features>
             <About></About>
             <Contact></Contact>
             <Footer></Footer>
