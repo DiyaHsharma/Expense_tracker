@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 function Header() {
     return (
 
-        <div className='h-[14vh] w-full relative top-0 bg-sky-300 flex justify-between items-center px-6 z-50'>
+        <div className='h-[14vh] w-full relative bg-gradient-to-b from-slate-500 via-slate-800 to-black text-white flex justify-between items-center px-6 z-50'>
             <Link to="/"><h1 className="text-4xl">Expense Tracker</h1></Link>
-            <div className='flex gap-5 items-center font-[Algerian]'>
+            <div className='flex gap-5 items-center font-semibold'>
                 <span className="hover:text-orange-500 hover:scale-125">
                     <Link to="/">Home</Link>
                 </span>

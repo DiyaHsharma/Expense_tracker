@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Login() {
     return (
         <>
-        <div className='w-99 h-[79vh] bg-sky-200 flex flex-col items-center gap-10'>
+        <div className='w-99 h-[79vh] bg-gradient-to-br from-black via-slate-800 to-slate-400 flex flex-col items-center gap-10'>
             <h1 className='text-4xl text-orange-400 pt-4'>Login</h1>
             <form className='flex flex-col gap-5 bg-white bg-opacity-75 rounded-md 
             shadow-lg w-[50vw] p-10'>

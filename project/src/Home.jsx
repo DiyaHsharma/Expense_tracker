@@ -4,6 +4,7 @@ import About from "./About";
 import Contact from "./Contact";
 import Header from "./Header";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 function Home() {
     return (
@@ -20,11 +21,12 @@ function Home() {
                 <p className="font-semibold text-yellow-200">
                     Experience the power of intelligent expense tracking and budget management with ExpenseTracker.
                 </p>
-                <button className="text-white bg-orange-400 rounded-full px-4 py-2 
+                <Link to='/signUp'><button className="text-white bg-orange-400 rounded-full px-4 py-2 
                 animate-pulse hover:bg-green-500 hover:-translate-y-1 ease-in duration-200
                 hover:animate-none">
                     Start Your Financial Journey
                 </button>
+                </Link>
 
             </div>
             <Card></Card>
