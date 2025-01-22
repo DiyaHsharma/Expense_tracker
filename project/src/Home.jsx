@@ -1,24 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 import Features from "./Features";
 import About from "./About";
 import Contact from "./Contact";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import Login from "./Login";
 
 function Home() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
     return (
         <>
-        <Header></Header>
-
-            <div className="h-[86vh] flex flex-col items-center justify-center  gap-10 p-6 
+        {isModalOpen && <Login closeModal={closeModal} />}
+        <div className={`${isModalOpen ? "bg-opacity-50" : ""} bg-gradient-to-b from-slate-700 via-slate-800 to-black text-white` }>
+        <Header openModal={openModal}></Header>
+        
+            
+            <div className="w-full h-[86vh] flex flex-col items-center justify-center  gap-10 p-6 
             bg-[url('https://static.vecteezy.com/system/resources/previews/041/335/190/non_2x/financial-business-statistics-with-bar-graph-and-candlestick-chart-show-stock-market-price-on-dark-background-vector.jpg')]
-            bg-cover">
+            bg-cover box-border scroll-mt-[14vh]" id='home'>
 
-                <h1 className="text-4xl font-bold text-yellow-200">
+                <h1 className="text-4xl font-bold text-yellow-200 text-center">
                     Master Your Finances With Precision
                 </h1>
-                <p className="font-semibold text-yellow-200">
+                <p className="font-semibold text-yellow-200 text-center">
                     Experience the power of intelligent expense tracking and budget management with ExpenseTracker.
                 </p>
                 <Link to='/signUp'><button className="text-white bg-orange-400 rounded-full px-4 py-2 
@@ -33,6 +46,7 @@ function Home() {
             <About></About>
             <Contact></Contact>
             <Footer></Footer>
+            </div>
         </>
     )
 }

@@ -4,7 +4,7 @@ import Footer from "./Footer";
 function SignUp(){
     return (
         <>
-        <div className='w-99 h-[79vh] bg-gradient-to-bl from-black via-slate-800 to-slate-400 flex flex-col items-center gap-10'>
+        <div className='w-full h-[85.5vh] bg-gradient-to-b from-black via-slate-800 to-slate-700 flex flex-col items-center gap-10'>
             <h1 className='text-4xl text-orange-400 pt-4'>SignUp</h1>
             <form className='flex flex-col gap-5 bg-white bg-opacity-75 rounded-md 
             shadow-lg w-[50vw] p-10'>

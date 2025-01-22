@@ -3,9 +3,9 @@ import Card from "./Card";
 
 function Features() {
     return (
-        <div className="text-center mb-4 min-h-[86vh]" id='features'>
+        <div className="text-center box-border mb-4 min-h-[86vh] scroll-mt-[14vh]" id='features'>
             <h1 className="text-4xl py-10 font-semibold bg-gradient-to-r from-gray-400 to-gray-600">Empowering Features</h1>
-            <div className="grid grid-cols-4 grid-flow-row justify-evenly gap-10 p-6 text-black">
+            <div className="w-full box-border grid grid-cols-2 md:grid-cols-4 grid-flow-row gap-4 p-6 text-black">
                 <Card heading={'About ExpenseTracker'}
                     detail={'Effortlessly record and categorize your expenses for a clear financial overview.'}
                     image={'https://img.freepik.com/premium-vector/financial-business-statistics-with-bar-graph-candlestick-chart-show-effective-earning-background_120819-717.jpg'} />

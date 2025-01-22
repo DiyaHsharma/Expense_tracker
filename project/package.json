@@ -17,6 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "tailwind:watch": "tailwindcss -o ./dist/output.css --watch",
     "dev": "concurrently \"npm run start\" \"npm run tailwind:watch\""
   },
   "eslintConfig": {
