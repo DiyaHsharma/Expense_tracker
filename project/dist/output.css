@@ -774,10 +774,6 @@ video {
   --tw-bg-opacity: 0.5;
 }
 
-.bg-opacity-75 {
-  --tw-bg-opacity: 0.75;
-}
-
 .bg-\[url\(\'https\:\/\/static\.vecteezy\.com\/system\/resources\/previews\/041\/335\/190\/non_2x\/financial-business-statistics-with-bar-graph-and-candlestick-chart-show-stock-market-price-on-dark-background-vector\.jpg\'\)\] {
   background-image: url('https://static.vecteezy.com/system/resources/previews/041/335/190/non_2x/financial-business-statistics-with-bar-graph-and-candlestick-chart-show-stock-market-price-on-dark-background-vector.jpg');
 }
@@ -835,8 +831,8 @@ video {
   --tw-gradient-to: #64748b var(--tw-gradient-to-position);
 }
 
-.to-slate-700 {
-  --tw-gradient-to: #334155 var(--tw-gradient-to-position);
+.to-slate-900 {
+  --tw-gradient-to: #0f172a var(--tw-gradient-to-position);
 }
 
 .bg-cover {
@@ -885,12 +881,20 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
 .pb-10 {
   padding-bottom: 2.5rem;
 }
 
 .pb-4 {
   padding-bottom: 1rem;
+}
+
+.pt-0\.5 {
+  padding-top: 0.125rem;
 }
 
 .pt-2 {
