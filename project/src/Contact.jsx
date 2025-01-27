@@ -5,7 +5,7 @@ function Contact() {
         <>
             <div className="w-full box-border p-6 flex flex-col items-center justify-center scroll-mt-[14vh]" id='contact'>
                 <h2 className="text-4xl font-semibold pb-10">Contact Us</h2>
-                <form className="flex flex-col items-center gap-5 text-orange-400" >
+                <form className="flex flex-col items-center gap-5 text-orange-400 aspect-square" method="POST" >
                     <div className="flex flex-col gap-2">
                         <label className="text-xl"
                         htmlFor="name">Name</label>
@@ -22,9 +22,8 @@ function Contact() {
                         <textarea className="border-black border-2 rounded-md w-[35vw] focus:outline-none"
                         name="message"></textarea>
                     </div>
-                    <button className="text-lg bg-orange-400 rounded-md w-3/5 py-1 
-                    text-white hover:ring-2 ring-emerald-200 ring-offset-1
-                     ring-offset-slate-50 hover:text-black"
+                    <button className="text-lg font-semibold bg-purple-500 rounded-xl w-3/5 py-1 
+                     hover:shadow-emerald-500 shadow-md text-black"
                     type="submit">Send Message</button>
                 </form>
             </div>

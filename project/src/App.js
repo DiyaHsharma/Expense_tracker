@@ -3,6 +3,7 @@ import Home from './Home';
 import SignUp from './SignUp';
 import Login from './Login'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import DashBoard from './DashBoard';
 
 function App() {
   return (
@@ -10,9 +11,10 @@ function App() {
       <Router>
         
           <Routes>
-          <Route path='/' element={<Home></Home>}></Route>
-          <Route path='/login' element={<Login></Login>}></Route>
-          <Route path='/signUp' element={<SignUp></SignUp>}></Route>
+          <Route path='/' element={<Home></Home>}/>
+          <Route path='/login' element={<Login></Login>}/>
+          <Route path='/signUp' element={<SignUp></SignUp>}/>
+          <Route path='/:userid' element={<DashBoard></DashBoard>}/>
         </Routes>
         
       </Router>

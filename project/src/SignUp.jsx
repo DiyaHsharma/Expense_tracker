@@ -8,11 +8,15 @@ function SignUp(){
         flex flex-col items-center gap-10'>
             <h1 className='text-4xl text-orange-400 pt-4'>SignUp</h1>
             <form className='flex flex-col gap-5 rounded-md bg-gradient-to-b from-slate-700 via-slate-800 to-black text-orange-400
-            shadow-lg w-[50vw] p-10 justify-center items-center'>
+            shadow-lg w-[50vw] p-10 justify-center items-center' method="POST">
                 <div className='flex flex-col items-center gap-5'>
                     <div className='flex flex-col gap-2'>
-                        <label htmlFor="mail">email or username:</label>
+                        <label htmlFor="mail">email:</label>
                         <input type='email' className='rounded-md' required name='mail' />
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                        <label htmlFor="name">username:</label>
+                        <input type='text' className='rounded-md' required name='name' />
                     </div>
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="password">password:</label>

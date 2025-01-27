@@ -3,7 +3,7 @@ import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
     return (
-        <div className="w-full box-border bg-gradient-to-b from-black via-slate-800 to-slate-500 text-white">
+        <div className="w-full h-[14.5vh] box-border bg-gradient-to-b from-black via-slate-800 to-slate-500 text-white">
             <div className="flex justify-between pt-2 items-center px-6">
                 <div className="flex flex-col items-center">
                     <img src="https://tse1.mm.bing.net/th?id=OIP.lbvtBQRFV0twQqyF8xhq3QHaHa&pid=Api&P=0&h=180" 
