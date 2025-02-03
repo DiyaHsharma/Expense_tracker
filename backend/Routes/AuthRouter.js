@@ -1,11 +1,9 @@
-const {signup,login}=require('../Controllers/AuthController');
-const {signupValidation}=require('../Middlewares/AuthValidation');
-const router=require('express').Router();
+const express = require("express");
+const { registerUser, loginUser } = require("../Controllers/AuthController");
+const router = express.Router();
 
+// Correct route for signup
+router.post("/signup", registerUser);  // Ensure this route matches your frontend request
+router.post("/login", loginUser);
 
-
-
-router.post("/login",loginValidation,login);
-router.post("/signup",signupValidation,signup);
-
-module.exports=router;
+module.exports = router;

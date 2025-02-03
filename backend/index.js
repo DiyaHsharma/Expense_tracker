@@ -1,24 +1,7 @@
-const express=require('express');
-const app=express();
-const bodyParser=require('body-parser');
-const cors=require('cors');
-const AuthRouter=require('./Routes/AuthRouter');
+const express = require("express");
+const connectDB = require("./Models/db");
 
-require('dotenv').config();
-require('./Models/db');
-app.use(bodyParser.json());
-app.use(cors());
+const app = express();
+connectDB(); // Call the function here
 
-
-const PORT=process.env.PORT ||8080;
-
-app.get('/ping',(req,res)=>{
-    res.send('PONG');
-})
-
-
-app.use('/auth',AuthRouter)
-
-app.listen(PORT,()=>{
-    console.log(`server is running on ${PORT}`)
-})
+app.listen(8080, () => console.log("🚀 Server is running on 8080"));
