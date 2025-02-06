@@ -20,6 +20,7 @@ function Home() {
     return (
         <>
             {isModalOpen && <Login closeModal={closeModal} />}
+            
             <div className={`${isModalOpen ? "bg-opacity-50" : ""} bg-gradient-to-b from-slate-700 via-slate-800 to-black text-white`}>
                 <Header openModal={openModal}></Header>
 

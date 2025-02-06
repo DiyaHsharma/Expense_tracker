@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { RiMessage3Line } from "react-icons/ri";
+import { MdDelete } from "react-icons/md";
+
+
 
 function Incomes() {
     const [formData, setFormData] = useState({
@@ -61,62 +65,71 @@ function Incomes() {
                 <h1 className="text-4xl p-4 bg-slate-600 text-orange-400 text-center rounded-lg">Total Income:</h1>
 
                 {error && <p className="text-red-500">{error}</p>}
-                {success && <p className="text-green-500">{success}</p>}
-
-                <form className="flex flex-col w-1/3 gap-5 text-orange-400" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Salary Title"
-                        className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="number"
-                        placeholder="Salary Amount"
-                        className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
-                        name="amount"
-                        value={formData.amount}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="date"
-                        placeholder="Enter A Date"
-                        className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
-                        name="date"
-                        value={formData.date}
-                        onChange={handleChange}
-                        required
-                    />
-                    <textarea
-                        placeholder="Add a Reference"
-                        className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                    ></textarea>
-                    <button
-                        className="text-lg font-semibold bg-purple-500 rounded-xl w-3/5 py-1 
+                {success && <p className="text-green-500 duration-200">{success}</p>}
+                <div className="flex gap-4">
+                    <form className="flex flex-col w-1/2 gap-5 text-orange-400" onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder="Salary Title"
+                            className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="number"
+                            placeholder="Salary Amount"
+                            className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
+                            name="amount"
+                            value={formData.amount}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="date"
+                            placeholder="Enter A Date"
+                            className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
+                            name="date"
+                            value={formData.date}
+                            onChange={handleChange}
+                            required
+                        />
+                        <textarea
+                            placeholder="Add a Reference"
+                            className="border-blue-900 border-2 rounded-sm p-1 w-full focus:outline-none"
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                        ></textarea>
+                        <button
+                            className="text-lg font-semibold bg-purple-500 rounded-xl w-3/5 py-1 
                      hover:shadow-emerald-500 shadow-md text-black"
-                        type="submit"
-                    >
-                        Add Income
-                    </button>
-                </form>
-
-                <div className="mt-8">
-                    <h2 className="text-2xl text-orange-400 mb-4">Income List:</h2>
-                    <ul className="bg-slate-800 text-orange-200 p-4 rounded-md">
-                        {incomes.map((income) => (
-                            <li key={income._id} className="mb-2">
-                                <strong>{income.title}</strong>: ₹ {income.amount} on {new Date(income.date).toLocaleDateString()}<br />
-                                {income.description && <span>Description: {income.description}</span>}
-                            </li>
-                        ))}
-                    </ul>
+                            type="submit"
+                        >
+                            Add Income
+                        </button>
+                    </form>
+                    {incomes.length==0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">
+                        No Expenses Added Yet</div>}
+                    {incomes.length!=0 && <div className="w-full">
+                            {incomes.map((income) => (
+                                <div className="flex justify-between p-4 mb-2 bg-slate-600 text-orange-400 rounded-lg" key={income._id}>
+                                    <div>
+                                    <div className="text-2xl">
+                                        {income.title}
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <span>₹ {income.amount}</span>
+                                        <span>{new Date(income.date).toLocaleDateString()}</span>
+                                        {income.description && <span className="flex  gap-2"><RiMessage3Line className="self-center" />
+                                            {income.description}</span>}
+                                    </div>
+                                    </div>
+                                    <button><MdDelete className="text-3xl self-center hover:shadow-emerald-500 shadow-md rounded-full"/></button>
+                                </div>
+                            ))}
+                    </div>}
                 </div>
             </div>
         </>
