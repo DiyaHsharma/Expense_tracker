@@ -3,7 +3,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./Routes/AuthRouter");
-const incomeRoutes=require("./Routes/incomeRoutes")
+const incomeRoutes=require("./Routes/incomeRoutes");
+const expenseRoutes = require("./Routes/expenseRoutes");
 
 dotenv.config();
 const app = express();
@@ -16,7 +17,8 @@ app.use(cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/incomes", incomeRoutes);  // Ensure the correct route is set here
+app.use("/api/incomes", incomeRoutes); 
+app.use("/api/expenses", expenseRoutes); 
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {

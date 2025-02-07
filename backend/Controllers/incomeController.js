@@ -1,23 +1,28 @@
 const Income = require("../Models/incomeModel");
 
-// Add a new income
-exports.addIncome = async (req, res) => {
+// Get all incomes
+const getIncomes = async (req, res) => {
     try {
-        const { title, amount, date, description } = req.body;
-        const newIncome = new Income({ title, amount, date, description });
-        await newIncome.save();
-        res.status(201).json({ message: "Income added successfully", income: newIncome });
+        const incomes = await Income.find();
+        res.status(200).json({ success: true, incomes }); // Ensure incomes is always an array
     } catch (error) {
-        res.status(500).json({ error: "Error adding income" });
+        res.status(500).json({ success: false, incomes: [], error: "Server error" });
     }
 };
 
-// Get all incomes
-exports.getIncomes = async (req, res) => {
+
+// Add a new income
+const addIncome = async (req, res) => {
+    const { title, amount, date, description } = req.body;
+
     try {
-        const incomes = await Income.find();
-        res.status(200).json(incomes);
+        const income = new Income({ title, amount, date, description });
+        await income.save();
+
+        res.status(201).json({ success: true, message: "Income added successfully", income });
     } catch (error) {
-        res.status(500).json({ error: "Error fetching incomes" });
+        res.status(500).json({ success: false, error: "Failed to add income" });
     }
 };
+
+module.exports = { getIncomes, addIncome };

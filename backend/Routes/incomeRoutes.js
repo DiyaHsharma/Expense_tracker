@@ -1,12 +1,8 @@
 const express = require("express");
-const { addIncome, getIncomes } = require("../Controllers/incomeController");
-
 const router = express.Router();
+const { getIncomes, addIncome } = require("../Controllers/incomeController");
 
-// POST /api/incomes - Add a new income
-router.post("/", addIncome);
-
-// GET /api/incomes - Get all incomes
 router.get("/", getIncomes);
+router.post("/", addIncome);
 
 module.exports = router;
