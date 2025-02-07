@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RiMessage3Line } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function Incomes() {
@@ -12,6 +12,27 @@ function Incomes() {
         date: "",
         description: "",
     });
+
+    const successNotify = () => {
+        toast.success("Income added successfully", {
+            position: "top-right",
+            autoClose: 2000, // Duration in ms
+            hideProgressBar: false, // Show the progress bar
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+
+            className: "bg-emerald-300 text-white shadow-md rounded-lg",
+            progressClassName: "bg-green-700",
+        });
+    };
+
+    const errorNotify = () => {
+        toast.error("Error Occured!", {
+            position: "top-left",
+            autoClose: 2000,
+        });
+    };
 
     const [incomes, setIncomes] = useState([]); // Ensure the initial state is an empty array
     const [error, setError] = useState("");
@@ -34,6 +55,18 @@ function Incomes() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    useEffect(() => {
+        if (success) {
+            successNotify(); // Trigger success toast only once
+        }
+    }, [success]);
+
+    useEffect(() => {
+        if (error) {
+            errorNotify(); // Trigger success toast only once
+        }
+    }, [error]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -54,9 +87,6 @@ function Incomes() {
         <>
             <div className="col-span-6 p-4 pt-0 flex flex-col gap-4" id="income">
                 <h1 className="text-4xl p-4 bg-slate-600 text-orange-400 text-center rounded-lg">Total Income:</h1>
-
-                {error && <p className="text-red-500">{error}</p>}
-                {success && <p className="text-green-500 duration-200">{success}</p>}
                 <div className="flex gap-4">
                     <form className="flex flex-col w-1/2 gap-5 text-orange-400" onSubmit={handleSubmit}>
                         <input
@@ -101,12 +131,12 @@ function Incomes() {
                             Add Income
                         </button>
                     </form>
-                    {incomes.length==0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">
+                    {incomes.length == 0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">
                         No Incomes Added Yet</div>}
-                    {incomes.length!=0 && <div className="w-full h-[60vh] overflow-y-auto">
-                            {incomes.map((income) => (
-                                <div className="flex justify-between p-4 mb-2 bg-slate-600 text-orange-400 rounded-lg" key={income._id}>
-                                    <div>
+                    {incomes.length != 0 && <div className="w-full h-[60vh] overflow-y-auto">
+                        {incomes.map((income) => (
+                            <div className="flex justify-between p-4 mb-2 bg-slate-600 text-orange-400 rounded-lg" key={income._id}>
+                                <div>
                                     <div className="text-2xl">
                                         {income.title}
                                     </div>
@@ -116,11 +146,12 @@ function Incomes() {
                                         {income.description && <span className="flex  gap-2"><RiMessage3Line className="self-center" />
                                             {income.description}</span>}
                                     </div>
-                                    </div>
-                                    <button><MdDelete className="text-3xl self-center hover:shadow-emerald-500 shadow-md rounded-full"/></button>
                                 </div>
-                            ))}
+                                <button><MdDelete className="text-3xl self-center hover:shadow-emerald-500 shadow-md rounded-full" /></button>
+                            </div>
+                        ))}
                     </div>}
+                    <ToastContainer />
                 </div>
             </div>
         </>
