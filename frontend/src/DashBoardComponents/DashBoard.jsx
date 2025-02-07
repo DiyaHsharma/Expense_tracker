@@ -41,7 +41,7 @@ function DashBoard() {
         setExpense(false);
     };
     return (
-        <div className="grid grid-cols-8 box-border h-screen gap-4 p-5 bg-gradient-to-b from-slate-700 to-black">
+        <div className="grid grid-cols-8 box-border min-h-screen gap-4 p-5 bg-gradient-to-b from-slate-700 to-black">
             <SideBar 
             closeDash={closeDash} openDash={openDash}
             openTransaction={openTransaction} closeTransaction={closeTransaction}

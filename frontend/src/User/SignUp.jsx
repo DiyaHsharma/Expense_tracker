@@ -1,6 +1,6 @@
 import React, { useState } from 'react';  // Add missing imports
 import axios from 'axios';  // Add axios import
-import Footer from './Footer';  // Add Footer import
+import Footer from '../MainComponents/Footer';  // Add Footer import
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {

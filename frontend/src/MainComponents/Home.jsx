@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Features from "./Features";
-import About from "./About";
-import Contact from "./Contact";
+import Features from "../HomeComponents/Features";
+import About from "../HomeComponents/About";
+import Contact from "../HomeComponents/Contact";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
-import Login from "./Login";
+import Login from "../User/Login";
 
 function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false);

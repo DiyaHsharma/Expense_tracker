@@ -1,9 +1,9 @@
 import './App.css';
-import Home from './Home';
-import SignUp from './SignUp';
-import Login from './Login'
+import Home from './MainComponents/Home';
+import SignUp from './User/SignUp';
+import Login from './User/Login'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import DashBoard from './DashBoard';
+import DashBoard from './DashBoardComponents/DashBoard';
 
 function App() {
   return (

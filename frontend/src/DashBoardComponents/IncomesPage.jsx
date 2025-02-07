@@ -102,8 +102,8 @@ function Incomes() {
                         </button>
                     </form>
                     {incomes.length==0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">
-                        No Expenses Added Yet</div>}
-                    {incomes.length!=0 && <div className="w-full">
+                        No Incomes Added Yet</div>}
+                    {incomes.length!=0 && <div className="w-full h-[60vh] overflow-y-auto">
                             {incomes.map((income) => (
                                 <div className="flex justify-between p-4 mb-2 bg-slate-600 text-orange-400 rounded-lg" key={income._id}>
                                     <div>
