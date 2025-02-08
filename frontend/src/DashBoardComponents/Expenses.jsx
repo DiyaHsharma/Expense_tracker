@@ -2,15 +2,38 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RiMessage3Line } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
+import { ToastContainer, toast } from 'react-toastify';
 
 function Expenses() {
-    
+
     const [formData, setFormData] = useState({
         title: "",
         amount: "",
         date: "",
         description: "",
     });
+
+    const successNotify = () => {
+        toast.success("Income added successfully", {
+            position: "top-right",
+            autoClose: 2000, // Duration in ms
+            hideProgressBar: false, // Show the progress bar
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+
+            className: "bg-emerald-300 text-white shadow-md rounded-lg",
+            progressClassName: "bg-green-700",
+        });
+    };
+
+    const errorNotify = () => {
+        toast.error("Error Occured!", {
+            position: "top-left",
+            autoClose: 2000,
+        });
+    };
+
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
     const [expenses, setExpenses] = useState([]);
@@ -39,11 +62,13 @@ function Expenses() {
             setSuccess(res.data.message);
             setError("");
             setFormData({ title: "", amount: "", date: "", description: "" });
+            successNotify();
 
             const updatedExpenses = await axios.get("http://localhost:5000/api/expenses");
             setExpenses(updatedExpenses.data.expenses || []);
         } catch (err) {
             setError(err.response?.data?.error || "Error adding expense");
+            errorNotify();
         }
     };
 
@@ -57,14 +82,12 @@ function Expenses() {
             setError("Failed to delete expense. Check console.");
         }
     };
-    
+
 
     return (
         <>
             <div className="col-span-6 p-4 pt-0 flex flex-col gap-4" id="expense">
                 <h1 className="text-4xl p-4 bg-slate-600 text-orange-400 text-center rounded-lg">Total Expenses:</h1>
-                {error && <p className="text-red-500">{error}</p>}
-                {success && <p className="text-green-500 duration-200">{success}</p>}
                 <div className="flex gap-4">
                     <form className="flex flex-col w-1/2 gap-5 text-orange-400" onSubmit={handleSubmit}>
                         <input
@@ -110,7 +133,7 @@ function Expenses() {
                         </button>
                     </form>
                     {expenses.length === 0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">No Expenses Added Yet</div>}
-                    {expenses.length !== 0 && <div className="w-full">
+                    {expenses.length !== 0 && <div className="w-full h-[60vh] overflow-y-auto rounded-lg">
                         {expenses.map((expense) => (
                             <div className="flex justify-between p-4 mb-2 bg-slate-600 text-orange-400 rounded-lg" key={expense._id}>
                                 <div>
@@ -122,11 +145,12 @@ function Expenses() {
                                     </div>
                                 </div>
                                 <button onClick={() => handleDelete(expense._id)}>
-                                    <MdDelete className="text-3xl self-center hover:shadow-emerald-500 shadow-md rounded-full"/>
+                                    <MdDelete className="text-3xl self-center hover:shadow-emerald-500 shadow-md rounded-full" />
                                 </button>
                             </div>
                         ))}
                     </div>}
+                    <ToastContainer/>
                 </div>
             </div>
         </>

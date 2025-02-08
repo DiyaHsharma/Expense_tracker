@@ -55,18 +55,6 @@ function Incomes() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    useEffect(() => {
-        if (success) {
-            successNotify(); // Trigger success toast only once
-        }
-    }, [success]);
-
-    useEffect(() => {
-        if (error) {
-            errorNotify(); // Trigger success toast only once
-        }
-    }, [error]);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -74,12 +62,14 @@ function Incomes() {
             setSuccess(res.data.message);
             setError("");
             setFormData({ title: "", amount: "", date: "", description: "" });
+            successNotify();
 
             // Fetch updated incomes
             const updatedIncomes = await axios.get("http://localhost:5000/api/incomes");
             setIncomes(updatedIncomes.data.incomes || []);
         } catch (err) {
             setError(err.response?.data?.error || "Error adding income");
+            errorNotify();
         }
     };
 
@@ -131,9 +121,9 @@ function Incomes() {
                             Add Income
                         </button>
                     </form>
-                    {incomes.length == 0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">
+                    {incomes.length ===0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">
                         No Incomes Added Yet</div>}
-                    {incomes.length != 0 && <div className="w-full h-[60vh] overflow-y-auto">
+                    {incomes.length !==0 && <div className="w-full h-[60vh] overflow-y-auto">
                         {incomes.map((income) => (
                             <div className="flex justify-between p-4 mb-2 bg-slate-600 text-orange-400 rounded-lg" key={income._id}>
                                 <div>
