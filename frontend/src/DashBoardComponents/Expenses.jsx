@@ -34,15 +34,15 @@ function Expenses() {
         });
     };
 
-    const [success, setSuccess] = useState("");
-    const [error, setError] = useState("");
     const [expenses, setExpenses] = useState([]);
+    
 
     useEffect(() => {
         const fetchExpenses = async () => {
             try {
                 const res = await axios.get("http://localhost:5000/api/expenses");
                 setExpenses(res.data.expenses || []);
+                
             } catch (err) {
                 console.error("Error fetching expenses:", err);
                 setExpenses([]);
@@ -59,27 +59,29 @@ function Expenses() {
         e.preventDefault();
         try {
             const res = await axios.post("http://localhost:5000/api/expenses", formData);
-            setSuccess(res.data.message);
-            setError("");
             setFormData({ title: "", amount: "", date: "", description: "" });
             successNotify();
 
             const updatedExpenses = await axios.get("http://localhost:5000/api/expenses");
             setExpenses(updatedExpenses.data.expenses || []);
+            
         } catch (err) {
-            setError(err.response?.data?.error || "Error adding expense");
             errorNotify();
+            
         }
     };
 
     const handleDelete = async (id) => {
         try {
             const res = await axios.delete(`http://localhost:5000/api/expenses/${id}`);
-            console.log("Delete Response:", res.data);  // Debugging line
-            setExpenses(expenses.filter(expense => expense._id !== id));
+
+            const updatedExpenses = await axios.get("http://localhost:5000/api/expenses");
+            setExpenses(updatedExpenses.data.expenses || []);
+            
+            // setExpenses(expenses.filter(expense => expense._id !== id));
         } catch (err) {
-            console.error("Error deleting expense:", err.response?.data || err);
-            setError("Failed to delete expense. Check console.");
+            errorNotify();
+            
         }
     };
 
@@ -87,7 +89,7 @@ function Expenses() {
     return (
         <>
             <div className="col-span-6 p-4 pt-0 flex flex-col gap-4" id="expense">
-                <h1 className="text-4xl p-4 bg-slate-600 text-orange-400 text-center rounded-lg">Total Expenses:</h1>
+                <h1 className="text-4xl p-4 bg-slate-600 text-orange-400 text-center rounded-lg">Total Expenses: ₹</h1>
                 <div className="flex gap-4">
                     <form className="flex flex-col w-1/2 gap-5 text-orange-400" onSubmit={handleSubmit}>
                         <input
@@ -133,7 +135,7 @@ function Expenses() {
                         </button>
                     </form>
                     {expenses.length === 0 && <div className="flex text-red-600 w-full justify-center items-center text-2xl font-semibold">No Expenses Added Yet</div>}
-                    {expenses.length !== 0 && <div className="w-full h-[60vh] overflow-y-auto rounded-lg">
+                    {expenses.length !== 0 && <div className="w-full h-[75vh] overflow-y-auto rounded-lg">
                         {expenses.map((expense) => (
                             <div className="flex justify-between p-4 mb-2 bg-slate-600 text-orange-400 rounded-lg" key={expense._id}>
                                 <div>
