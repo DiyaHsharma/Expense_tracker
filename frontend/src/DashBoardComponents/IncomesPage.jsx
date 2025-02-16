@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RiMessage3Line } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Incomes() {
     const [formData, setFormData] = useState({
@@ -12,67 +13,72 @@ function Incomes() {
         description: "",
     });
 
-    const successNotify = () => {
-        toast.success("Income added successfully", {
+    const [incomes, setIncomes] = useState([]);
+
+    // Toast Notifications
+    const successNotify = (message) => {
+        toast.success(message, {
             position: "top-right",
-            autoClose: 2000, // Duration in ms
-            hideProgressBar: false, // Show the progress bar
+            autoClose: 2000,
+            hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-
             className: "bg-emerald-300 text-white shadow-md rounded-lg",
             progressClassName: "bg-green-700",
         });
     };
 
-    const errorNotify = () => {
-        toast.error("Error Occured!", {
+    const errorNotify = (message) => {
+        toast.error(message, {
             position: "top-left",
             autoClose: 2000,
         });
     };
 
-    const [incomes, setIncomes] = useState([]);
-
+    // Fetch incomes on component mount
     useEffect(() => {
         const fetchIncomes = async () => {
             try {
                 const res = await axios.get("http://localhost:5000/api/incomes");
-
                 setIncomes(res.data.incomes || []);
             } catch (err) {
-                setIncomes([]);
+                errorNotify("Failed to fetch incomes");
             }
         };
         fetchIncomes();
     }, []);
 
+    // Handle form input changes
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // Handle form submission to add income
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await axios.post("http://localhost:5000/api/incomes", formData);
             setFormData({ title: "", amount: "", date: "", description: "" });
-            successNotify();
-
-            const updatedIncomes = await axios.get("http://localhost:5000/api/incomes");
+            successNotify("Income added successfully");
+            setIncomes((prev) => [...prev, res.data.income]); // Add the new income to the state
         } catch (err) {
-            errorNotify();
+            errorNotify("Failed to add income");
         }
     };
 
-    const handleDelete = async (incomeId, incomeAmount) => {
+    // Handle deleting an income
+    const handleDelete = async (incomeId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/incomes/${incomeId}`);
-            
-            const updatedIncomes = await axios.get("http://localhost:5000/api/incomes");
-            setIncomes(updatedIncomes.data.incomes || []);
+            const response = await axios.delete(`http://localhost:5000/api/incomes/${incomeId}`);
+            if (response.data.success) {
+                setIncomes((prevIncomes) => prevIncomes.filter((income) => income._id !== incomeId));
+                successNotify("Income deleted successfully");
+            } else {
+                errorNotify(response.data.error || "Failed to delete income");
+            }
         } catch (err) {
-            errorNotify();
+            errorNotify("An error occurred while deleting income");
         }
     };
 
@@ -80,7 +86,7 @@ function Incomes() {
         <>
             <div className="col-span-6 p-4 pt-0 flex flex-col gap-4" id="income">
                 <h1 className="text-4xl p-4 bg-slate-600 text-orange-400 text-center rounded-lg">
-                    Total Income: ₹
+                    Total Income: ₹{incomes.reduce((total, inc) => total + parseFloat(inc.amount || 0), 0)}
                 </h1>
                 <div className="flex gap-4">
                     <form className="flex flex-col w-1/2 gap-5 text-orange-400" onSubmit={handleSubmit}>
@@ -153,7 +159,7 @@ function Incomes() {
                                             )}
                                         </div>
                                     </div>
-                                    <button onClick={() => handleDelete(income._id, income.amount)}>
+                                    <button onClick={() => handleDelete(income._id)}>
                                         <MdDelete className="text-3xl self-center hover:shadow-emerald-500 shadow-md rounded-full" />
                                     </button>
                                 </div>

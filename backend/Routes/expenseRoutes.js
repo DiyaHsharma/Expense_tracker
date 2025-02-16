@@ -5,6 +5,6 @@ const { getExpenses, addExpense,deleteExpense } = require("../Controllers/expens
 
 router.get("/", getExpenses);
 router.post("/", addExpense);
-router.delete("/expenses/:id", deleteExpense);
+router.delete("/:id", deleteExpense);
 
 module.exports = router;

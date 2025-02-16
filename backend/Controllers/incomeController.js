@@ -24,5 +24,19 @@ const addIncome = async (req, res) => {
         res.status(500).json({ success: false, error: "Failed to add income" });
     }
 };
+const deleteIncome = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedIncome = await Income.findByIdAndDelete(id);
 
-module.exports = { getIncomes, addIncome };
+        if (!deletedIncome) {
+            return res.status(404).json({ success: false, error: "Income not found" });
+        }
+
+        res.status(200).json({ success: true, message: "Income deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ success: false, error: "Server error" });
+    }
+};
+
+module.exports = { getIncomes, addIncome , deleteIncome};
